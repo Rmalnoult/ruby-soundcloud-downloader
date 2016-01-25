@@ -13,19 +13,34 @@ class Client
 
 	end
 
-	def fetch_artist(name)
+	def get_artist(name)
 		artists = @client.get('/users', q: name)
-		return artists.first
+		artist_soundcloud = artists.first
+		artist = Artist.new({
+			id: artist_soundcloud["id"],
+			name: artist_soundcloud["username"],
+			url: artist_soundcloud["url"]
+		})
+		return artist
 	end
 
-	def fetch_tracks(id)
-		tracks = @client.get("/users/#{id}/tracks")
+	def get_tracks(id)
+		tracks_souncloud = @client.get("/users/#{id}/tracks")
+		tracks = []
+		tracks_souncloud.each do |track_sc|
+			track = Track.new({
+				id: track_sc['id'],
+				title: track_sc['title'],
+				url: track_sc['stream_url'],
+			})
+			tracks << track
+		end
 		return tracks
 	end
 
-	def download_track(track)
-		stream_url = track["stream_url"] ? track["stream_url"] : ''
-		filename = track["user"]["username"] + ' - ' + track["title"]
+	def download_track(artist, track)
+		stream_url = track.url ? track.url : ''
+		filename   = artist.name + ' - ' + track.title
 		@downloader.download(stream_url, { file_name: filename, display_progress: true })
 	end
 end

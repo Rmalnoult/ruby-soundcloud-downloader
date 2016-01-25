@@ -12,8 +12,9 @@ class View
 	end
 
 	def display_tracks(artist, tracks)
-		tracks.each.with_index do |track, i|
-			puts i.to_s + ' | ' + track['title']
+		puts "All tracks by #{artist.name}"
+		tracks.each_with_index do |track, i|
+			puts i.to_s + ' | ' + track.title
 		end
 	end
 
@@ -24,9 +25,9 @@ class View
 		return track_index
 	end
 
-	def display_success_message(track)
-		puts 'All good ! The song ' + track["title"] + ' by artist ' + track["user"]["username"] + ' was just downloaded'
+	def display_success_message(artist, track)
+		puts '\n'
+		puts 'All good ! The song ' + track.title + ' by artist ' + artist.name + ' was just downloaded'
 	end
 
-  # ...
 end
