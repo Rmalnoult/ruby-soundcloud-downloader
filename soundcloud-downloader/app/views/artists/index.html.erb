@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Results for <%= @artist_name %></h1>
+<hr>
+
+<% @artists.each do |artist| %>
+	<a href="/artists/<%= artist.id %>">
+		<div class="panel panel-default col-md-6 col-md-offset-3">
+			<div class="panel-body">
+				<div class="col-md-3">
+					<img src="<%= artist.avatar_url%>" alt="">
+				</div>
+				<div class="col-md-9">
+					<h3><%= artist.name %></h3>
+					<p><%= artist.track_count %> tracks</p>
+				</div>
+			</div>
+		</div>
+	</a>
+<% end %>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center"><%= @artist.name %></h1>
+<img class="col-md-2 col-md-offset-5" src="<%= @artist.avatar_url%>" alt="">
+<div class="row col-md-12"><hr></div>
+
+
+<div class="col-md-6 col-md-offset-3">
+	<ul class="list-group">
+		<% @tracks.each do |track| %>
+			<li class="list-group-item">
+				<p class="col-md-9"><%= track.title %></p>
+				<a class="pull-right btn btn-md btn-default" href="/tracks/<%= track.id %>">
+					<span class="glyphicon glyphicon-download"></span>
+					Download
+				</a>
+				<br>
+				<br>
+			</li>
+		<% end %>
+	</ul>
+
+</div>
